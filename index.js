@@ -43,9 +43,9 @@ module.exports = function(schema, options) {
 		};
 
 		if (obj instanceof Array) return obj.map(function(object) {
-			return addLocalized(toJSON ? object.toJSON() : object.toObject(), locale);
+			return addLocalized(object.hasOwnProperty('toJson') && toJSON ? object.toJSON() : object, locale);
 		});
-		else return addLocalized(toJSON ? obj.toJSON() : obj.toObject(), locale);
+		else return addLocalized(obj.hasOwnProperty('toJson') && toJSON  ? obj.toJSON() : obj, locale);
 	};
 
 	schema.methods.toJSONLocalized = function(obj, locale) {
@@ -58,15 +58,7 @@ module.exports = function(schema, options) {
 		return ret;
 	};
 
-	schema.methods.toObjectLocalized = function(obj, locale) {
-		var ret;
-		if (typeof obj === 'object') {
-			ret = localize(obj, locale, false);
-		} else if (typeof obj === 'string' && this.hasOwnProperty('isNew')) {
-			ret = localize(this, obj, false);
-		}
-		return ret;
-	};
+
 	
 	var localizeOnly = function(obj, locale, localeDefault, toJSON) {
 		var addLocalized = function(obj) {
@@ -102,13 +94,4 @@ module.exports = function(schema, options) {
 		return ret;
 	};
 
-	schema.methods.toObjectLocalizedOnly = function(obj, locale, localeDefault) {
-		var ret;
-		if (typeof obj === 'object') {
-			ret = localizeOnly(obj, locale, localeDefault, false);
-		} else if (typeof obj === 'string' && this.hasOwnProperty('isNew')) {
-			ret = localizeOnly(this, obj, locale, false);
-		}
-		return ret;
-	};
 };

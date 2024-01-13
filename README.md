@@ -1,4 +1,4 @@
-# mongoose-i18n-localize
+# mongoose-i18n
 
 mongoose-i18n-localize is a mongoose plugin to support i18n and localization in your mongoose schemas.
 
@@ -7,7 +7,7 @@ It seems like [mongoose-i18n](https://github.com/elrolito/mongoose-i18n) is not 
 ## Usage
 
 ```
-npm install mongoose-i18n-localize
+npm install mongoose-i18n
 ```
 
 Create your schema:
@@ -72,10 +72,9 @@ Model.find(function(err, resources) {
 ]
 ```
 
-Use `toObjectLocalized` or `toJSONLocalized` according to `toObject` or `toJSON`.
+Use `toJSONLocalized` according to `toJSON`.
 
 If you only want to show only one locale message use the methods
-`toObjectLocalizedOnly(resource, locale, localeDefault)` or
 `toJSONLocalizedOnly(resource, locale, localeDefault)`.
 
 # Tests
